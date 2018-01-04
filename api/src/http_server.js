@@ -43,8 +43,7 @@ const resolvers = {
         resolve(items)
       })
     });
-  }
-}
+  }}
 };
 
 const schema = makeExecutableSchema({
@@ -56,15 +55,8 @@ const schema = makeExecutableSchema({
 // Routes
 //=============================================================================
 
-//CORS
-// app.all("/*", (req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//   next();
-// });
-
 app.use('/graphql', bodyParser.json(), graphqlExpress({ schema: schema }));
-app.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' })); // if you want GraphiQL enabled
+app.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 //=============================================================================
 // Queries
