@@ -1,0 +1,9 @@
+FROM node:latest
+
+RUN mkdir -p /srv/app
+WORKDIR /srv/app
+EXPOSE 3000
+
+RUN npm install nodemon -g
+ENTRYPOINT ["/srv/app/install.sh"]
+CMD ["nodemon", "-L", "src/http_server.js"]

@@ -1,0 +1,32 @@
+version: '3'
+
+volumes:
+  pgdata: {}
+
+services:
+
+  api:
+    build: 
+      context: ../api
+      dockerfile: Dockerfile-dev
+    image: noti/api:local
+    depends_on:
+      - db
+    environment:
+      - DB=postgresql://noti:iton@db:5432/noti_local
+    volumes:
+      - ../api:/srv/app
+    ports:
+      - "3000:3000"
+
+  db:
+    image: mdillon/postgis:10
+    environment:
+      - POSTGRES_USER=noti
+      - POSTGRES_PASSWORD=iton
+      - POSTGRES_DB=noti_local
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
